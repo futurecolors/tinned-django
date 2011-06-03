@@ -31,9 +31,9 @@ def make_django_project(project_name=''):
         return prompt('Введите домен сервера (domain.com): ', validate=r'(\w+\.)?\w+\.\w+')
 
     hello()
-    project_name = 'zzz' #get_project_name(project_name)
-    server_ip = '4.4.4.4'# get_ip()
-    server_name = 'zzz.ru' #get_server_name()
+    project_name = get_project_name(project_name)
+    server_ip = get_ip()
+    server_name = get_server_name()
 
     def get_group_users():
         group_file = local('cat /etc/group', capture=True)
@@ -91,10 +91,13 @@ def make_django_project(project_name=''):
     def make_fabfile():
         from jinja2 import Environment, FileSystemLoader
         jenv = Environment(loader=FileSystemLoader('/tmp/{0}/{1}/'.format(project_name, BLANK_PROJECT_NAME)))
-        text = jenv.get_template('fabfile.py').render({'SERVER_IP': server_name,
+        text = jenv.get_template('fabfile.py').render({'SERVER_IP': server_ip,
                                                        'SERVER_NAME': server_name,
                                                        'INSTANCE_NAME': project_name})
-        print text
+        
+        f = open('/tmp/{0}/{1}/fabfile.py'.format(project_name, BLANK_PROJECT_NAME), 'w')
+        f.write(text)
+
 
     def insert_project_name():
         replace_string_in_file({'{{ PROJECT_NAME }}': project_name},

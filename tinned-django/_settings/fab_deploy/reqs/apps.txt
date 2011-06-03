@@ -1,0 +1,10 @@
+# django apps and related python packages, e.g. django-registration
+django-annoying==0.7.6
+django-debug-toolbar==0.8.4
+django-redis-cache==0.5.0
+redis==2.2.4
+django-sentry=1.8.4.2
+south==0.7.3
+-e hg+https://bitbucket.org/izi/django-admin-tools@8bcc0fba2346#egg=django-admin-tools
+django_compressor==0.6.2
+-e git+https://github.com/carljm/django-model-utils@b7c5a593901181e501fc#egg=django-model-utils

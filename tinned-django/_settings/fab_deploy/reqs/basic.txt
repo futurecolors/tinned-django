@@ -1,0 +1,11 @@
+# packages that are widely used and rarely updated
+PIL
+MySQL-python
+FirePython==0.9
+PyYAML
+sorl-thumbnail==11.01
+pytils
+pymorphy
+simplejson
+selementtree
+

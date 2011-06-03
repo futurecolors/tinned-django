@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from fabric.api import run, env, settings
+from fab_deploy import utils
 
 @utils.run_as('root')
 def set_chmod():

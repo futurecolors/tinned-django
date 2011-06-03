@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from fabric.api import run, env, settings
 from fab_deploy import utils
 from fab_deploy.system import aptitude_install
 
