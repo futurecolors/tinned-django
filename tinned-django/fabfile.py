@@ -3,7 +3,9 @@ from fab_deploy import *
 from fabric.context_managers import cd
 from fabric.api import run, env
 from _settings.environment.production import DATABASES as prod_databases
-from fc.fabdeploy_extensions.deploy import make_django_project
+from fc.fabdeploy_extensions.start_project import make_django_project
+from fc.fabdeploy_extensions.apps import chmod, uwsgi
+from fabric.contrib import files
 
 def prod():
     env.hosts = ['futurecolors@{{ SERVER_IP }}']
@@ -23,3 +25,35 @@ def prod():
         OS                      = 'squeeze',
     )
     update_env()
+
+    
+def full_deploy():
+    deploy.full_deploy()
+    chmod.set_chmod()
+    dj_cmd.collectstatic()
+    dj_cmd.compress()
+
+
+def update_django_config(restart=True):
+    files.upload_template(
+        utils._project_path(env.conf.REMOTE_CONFIG_TEMPLATE),
+        utils._remote_project_path(env.conf.LOCAL_CONFIG),
+        env.conf, True
+    )
+    if restart:
+        uwsgi.uwsgi_reload()
+
+
+def push(*args, **kwargs):
+    deploy.push(*args, **kwargs)
+    if 'norestart' not in args:
+        uwsgi.uwsgi_reload()
+
+
+def setup_web_server():
+    """ Sets up a web server (uwsgi + nginx). """
+    uwsgi.uwsgi_install()
+    nginx.nginx_install()
+
+    nginx.nginx_setup()
+    uwsgi.uwsgi_setup()

@@ -31,9 +31,9 @@ def make_django_project(project_name=''):
         return prompt('Введите домен сервера (domain.com): ', validate=r'(\w+\.)?\w+\.\w+')
 
     hello()
-    project_name = get_project_name(project_name)
-    server_ip =  get_ip()
-    server_name = get_server_name()
+    project_name = 'zzz' #get_project_name(project_name)
+    server_ip = '4.4.4.4'# get_ip()
+    server_name = 'zzz.ru' #get_server_name()
 
     def get_group_users():
         group_file = local('cat /etc/group', capture=True)
@@ -61,7 +61,6 @@ def make_django_project(project_name=''):
             local('rm -rf {0}/.git'.format(project_name))
 
         make_fabfile()
-        return
         insert_project_name()
         generate_secret_key()
         create_user_sql_settings()
