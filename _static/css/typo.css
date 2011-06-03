@@ -1,0 +1,22 @@
+/**
+ * Типографика сайта
+ *
+ * @package     {{ PROJECT_NAME }}
+ * @version     1.0
+ * @author      Голиков Артём <art@futurecolors.ru>
+ * @copyright   Future Colors
+ */
+
+
+/**
+ * @section     Типографика сайта
+ */
+
+.g-content {}
+.g-content p {}
+.g-content ul,
+.g-content ol {}
+.g-content ul {}
+.g-content ol {}
+.g-content a {}
+.g-content a:hover {}

@@ -1,0 +1,32 @@
+{% extends "admin_tools/dashboard/module.html" %}
+
+{% block module_content %}
+<style type="text/css">
+.b-maintenance-adminblock {
+    padding: 1ex 0px;
+    text-align: center;
+}
+.b-maintenance-adminblock-maintenance {
+    background: #ff0;
+}
+.b-maintenance-adminblock-status {
+    padding: 1ex 0px;
+    font-size: 1.4em;
+}
+</style>
+<form class="b-maintenance-adminblock
+             {% if module.in_maintenance_mode %}b-maintenance-adminblock-maintenance{% endif %}"
+      action="" method="post">
+    {% csrf_token %}
+    <div class="b-maintenance-adminblock-status">
+        {% if module.in_maintenance_mode %}
+        Сайт на обслуживании
+        {% else %}
+        Сайт включён
+        {% endif %}
+    </div>
+    <input type="hidden" name="maintenance" value="maintenance" />
+    <input type="submit"
+           value="{% if module.in_maintenance_mode %}Включить{% else %}Выключить{% endif %}" />
+</form>
+{% endblock %}

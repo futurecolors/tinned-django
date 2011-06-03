@@ -1,0 +1,4 @@
+<uwsgi>
+    <socket>127.0.0.1:4000</socket>
+    <module>wsgi</module>
+</uwsgi>
