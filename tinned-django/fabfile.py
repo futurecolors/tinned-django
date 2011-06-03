@@ -3,13 +3,13 @@ from fab_deploy import *
 from fabric.context_managers import cd
 from fabric.api import run, env
 from _settings.environment.production import DATABASES as prod_databases
-
+from fc.fabdeploy_extensions.deploy import make_django_project
 
 def prod():
-    env.hosts = ['futurecolors@']
+    env.hosts = ['futurecolors@{{ SERVER_IP }}']
     env.conf = dict(
-        SERVER_NAME             = '',
-        INSTANCE_NAME           = '',
+        SERVER_NAME             = '{{ SERVER_NAME }}',
+        INSTANCE_NAME           = '{{ INSTANCE_NAME }}',
         NAME                    = 'production',
         DB_NAME                 = prod_databases['default']['NAME'],
         DB_USER                 = prod_databases['default']['USER'],
