@@ -4,10 +4,10 @@ DEBUG = False
 
 DATABASES = {
     'default': {
-        'NAME': '',
+        'NAME': '{{ DB_NAME }}',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': '{{ DB_USER }}',
+        'PASSWORD': '{{ DB_PASSWORD }}',
         'HOST': 'localhost',
         'OPTIONS': {"init_command": "SET storage_engine=INNODB"}
     }
@@ -26,6 +26,6 @@ CACHES = {
     },
 }
 
-# Включаем компрессию по-умолчанию
+# Compress by default
 COMPRESS = True
 COMPRESS_OFFLINE = True
