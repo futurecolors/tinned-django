@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from jinja2 import Environment, FileSystemLoader
 from fabric.colors import green, red
 from fabric.operations import local, prompt
 from fabric.context_managers import lcd, settings, hide
@@ -12,6 +12,7 @@ BLANK_PROJECT_REPO = 'git://github.com/futurecolors/tinned-django.git'
 BLANK_PROJECT_BRANCH_NAME = 'master'
 BLANK_PROJECT_NAME = 'tinned-django'
 GROUP_FOR_PARSE = 'fcolors'
+USERNAME = 'futurecolors'
 
 def make_django_project(project_name=''):
 
@@ -60,6 +61,7 @@ def make_django_project(project_name=''):
                                                                   dir=project_name))
             local('rm -rf {0}/.git'.format(project_name))
 
+        build_sql_settings()
         make_fabfile()
         insert_project_name()
         generate_secret_key()
@@ -88,15 +90,25 @@ def make_django_project(project_name=''):
         # Удаляем временный репозиторий
         local('rm -rf /tmp/{0}/'.format(project_name))
 
+    def build_sql_settings():
+        jenv = Environment(loader=FileSystemLoader('/tmp/{0}/{1}/_settings/environment/'.format(project_name, BLANK_PROJECT_NAME)))
+        db_password = ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789') for i in range(10)])
+        text = jenv.get_template('production.py').render({'DB_NAME': project_name,
+                                                       'DB_USER': USERNAME,
+                                                       'DB_PASSWORD': db_password})
+        f = open('/tmp/{0}/{1}/_settings/environment/production.py'.format(project_name, BLANK_PROJECT_NAME), 'w')
+        f.write(text.encode('UTF-8'))
+
     def make_fabfile():
-        from jinja2 import Environment, FileSystemLoader
         jenv = Environment(loader=FileSystemLoader('/tmp/{0}/{1}/'.format(project_name, BLANK_PROJECT_NAME)))
+        db_root_password = ''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789') for i in range(10)])
         text = jenv.get_template('fabfile.py').render({'SERVER_IP': server_ip,
                                                        'SERVER_NAME': server_name,
-                                                       'INSTANCE_NAME': project_name})
+                                                       'INSTANCE_NAME': project_name,
+                                                       'DB_ROOT_PASSWORD': db_root_password})
         
         f = open('/tmp/{0}/{1}/fabfile.py'.format(project_name, BLANK_PROJECT_NAME), 'w')
-        f.write(text)
+        f.write(text.encode('UTF-8'))
 
 
     def insert_project_name():
