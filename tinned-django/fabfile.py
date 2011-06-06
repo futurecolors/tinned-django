@@ -12,26 +12,29 @@ def prod():
     env.conf = dict(
         SERVER_NAME             = '{{ SERVER_NAME }}',
         INSTANCE_NAME           = '{{ INSTANCE_NAME }}',
+        SUDO_USER               = 'futurecolors',
         NAME                    = 'production',
         DB_NAME                 = prod_databases['default']['NAME'],
         DB_USER                 = prod_databases['default']['USER'],
         DB_PASSWORD             = prod_databases['default']['PASSWORD'],
+        DB_ROOT_PASSWORD        = '{{ DB_ROOT_PASSWORD }}',
         VCS                     = 'git',
         GIT_BRANCH              = 'master',
         REMOTE_CONFIG_TEMPLATE  = 'settings.py',
         PIP_REQUIREMENTS_PATH   = '_settings/fab_deploy/reqs',
         PIP_REQUIREMENTS_ACTIVE = 'active.txt',
         CONFIG_TEMPLATES_PATHS  = ['_settings/fab_deploy/config_templates'],
-        OS                      = 'squeeze',
+        OS                      = 'squeeze'
     )
     update_env()
 
     
 def full_deploy():
-    #TODO: install vim, mc
-    mysql.mysql_install()
-    mysql.mysql_create_db()
-    deploy.full_deploy()
+    """ Prepares server and deploys the project. """
+    #TODO: install vim, mс
+    prepare_server()
+    system.deploy_project()
+
     chmod.set_chmod()
     dj_cmd.collectstatic()
     dj_cmd.compress()
@@ -43,12 +46,15 @@ def prepare_server():
     if os in ['lenny', 'squeeze']:
         install_sudo()
 
-    setup_backports()
+    system.setup_backports()
     fc_setup_testing_sources()
+
+    mysql.mysql_install()
+    mysql.mysql_create_db()
     install_common_software()
 
-    
-@utils.run_as('root')
+
+@utils.run_as_sudo
 def fc_setup_testing_sources():
     """ Adds testing repo to apt sources. """
     os = utils.detect_os()
@@ -61,11 +67,11 @@ def fc_setup_testing_sources():
         fabric_utils.puts("Testing sources are not available for " + os)
         return
 
-    run("echo 'deb %s' > /etc/apt/sources.list.d/wheezy.list" % testing[os])
+    sudo("echo 'deb %s' > /etc/apt/sources.list.d/wheezy.list" % testing[os])
     with settings(warn_only=True):
         run('aptitude update')
 
-        
+
 def update_django_config(restart=True):
     files.upload_template(
         utils._project_path(env.conf.REMOTE_CONFIG_TEMPLATE),
