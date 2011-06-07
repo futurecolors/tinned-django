@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from settings import ROOT_PATH, DEBUG
 
 # Настройки шаблонов
@@ -11,8 +12,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 if DEBUG:
     TEMPLATE_CONTEXT_PROCESSORS += ('django.core.context_processors.debug',)
+
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.filesystem.Loader',
 )
+
 TEMPLATE_DEBUG = DEBUG
+
+TEMPLATE_DIRS = (
+    os.path.join(ROOT_PATH, 'templates'),
+)
