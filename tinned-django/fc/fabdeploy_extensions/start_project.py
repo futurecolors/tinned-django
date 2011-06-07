@@ -105,7 +105,8 @@ def make_django_project(project_name=''):
         text = jenv.get_template('fabfile.py').render({'SERVER_IP': server_ip,
                                                        'SERVER_NAME': server_name,
                                                        'INSTANCE_NAME': project_name,
-                                                       'DB_ROOT_PASSWORD': db_root_password})
+                                                       'DB_ROOT_PASSWORD': db_root_password,
+                                                       'USERNAME': USERNAME})
         
         f = open('/tmp/{0}/{1}/fabfile.py'.format(project_name, BLANK_PROJECT_NAME), 'w')
         f.write(text.encode('UTF-8'))

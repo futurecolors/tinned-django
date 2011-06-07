@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from _settings.environment.production import DATABASES as prod_databases
 
+
 def production():
-    env.hosts = ['futurecolors@{{ SERVER_IP }}']
+    env.hosts = ['{{ USERNAME }}@{{ SERVER_IP }}']
     env.conf = dict(
         SERVER_NAME             = '{{ SERVER_NAME }}',
         INSTANCE_NAME           = '{{ INSTANCE_NAME }}',
-        SUDO_USER               = 'futurecolors',
+        SUDO_USER               = '{{ USERNAME }}',
         NAME                    = 'production',
         DB_NAME                 = prod_databases['default']['NAME'],
         DB_USER                 = prod_databases['default']['USER'],
