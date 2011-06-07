@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from settings import (DEBUG, PROFILER_ENABLED, FIRELOGGER, DEBUG_TOOLBAR_ENABLED,
-                      SENTRY_ENABLED, SWFUPLOAD_MIDDLEWARE_VIEWS)
+                      SENTRY_ENABLED,)
 
 MIDDLEWARE_CLASSES = (
     'fc.maintenance.middlewares.MaintenanceMiddleware',
@@ -10,9 +10,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
-
-if SWFUPLOAD_MIDDLEWARE_VIEWS:
-    MIDDLEWARE_CLASSES += ('fc.swfupload.middlewares.SWFUploadMiddleware',)
 
 if DEBUG and PROFILER_ENABLED:
     MIDDLEWARE_CLASSES += ('fc.profile.middlewares.ProfileMiddleware',)
