@@ -1,13 +1,7 @@
 # -*- coding: utf-8 -*-
-from fab_deploy import *
-from fabric.context_managers import cd
-from fabric.api import run, env
 from _settings.environment.production import DATABASES as prod_databases
-from fc.fabdeploy_extensions.start_project import make_django_project
-from fc.fabdeploy_extensions.apps import chmod, uwsgi
-from fabric.contrib import files
 
-def prod():
+def production():
     env.hosts = ['futurecolors@{{ SERVER_IP }}']
     env.conf = dict(
         SERVER_NAME             = '{{ SERVER_NAME }}',
@@ -29,70 +23,5 @@ def prod():
     )
     update_env()
 
-    
-def full_deploy():
-    """ Prepares server and deploys the project. """
-    #TODO: install vim, mс
-    prepare_server()
-    system.deploy_project()
-
-    chmod.set_chmod()
-    dj_cmd.collectstatic()
-    dj_cmd.compress()
-
-
-def prepare_server():
-    """ Prepares server: installs system packages. """
-    os = utils.detect_os()
-    if os in ['lenny', 'squeeze']:
-        install_sudo()
-
-    system.setup_backports()
-    fc_setup_testing_sources()
-
-    mysql.mysql_install()
-    mysql.mysql_create_db()
-    install_common_software()
-
-
-@utils.run_as_sudo
-def fc_setup_testing_sources():
-    """ Adds testing repo to apt sources. """
-    os = utils.detect_os()
-    debian_repo = 'http://mirror.yandex.ru'
-    testing = {
-        'squeeze': '{0}/debian wheezy main non-free contrib'.format(debian_repo),
-    }
-
-    if os not in testing:
-        fabric_utils.puts("Testing sources are not available for " + os)
-        return
-
-    sudo("echo 'deb %s' > /etc/apt/sources.list.d/wheezy.list" % testing[os])
-    with settings(warn_only=True):
-        run('aptitude update')
-
-
-def update_django_config(restart=True):
-    files.upload_template(
-        utils._project_path(env.conf.REMOTE_CONFIG_TEMPLATE),
-        utils._remote_project_path(env.conf.LOCAL_CONFIG),
-        env.conf, True
-    )
-    if restart:
-        uwsgi.uwsgi_reload()
-
-
-def push(*args, **kwargs):
-    deploy.push(*args, **kwargs)
-    if 'norestart' not in args:
-        uwsgi.uwsgi_reload()
-
-
-def setup_web_server():
-    """ Sets up a web server (uwsgi + nginx). """
-    uwsgi.uwsgi_install()
-    nginx.nginx_install()
-
-    nginx.nginx_setup()
-    uwsgi.uwsgi_setup()
+def prod():
+    return production()

@@ -1,13 +1,11 @@
 from fabric.api import run, env, settings
 from fab_deploy import utils
 from fab_deploy import system
-from fab_deploy import apache
-
 
 __all__ = ['nginx_install', 'nginx_setup', 'nginx_restart', 'nginx_start']
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def nginx_install():
     """ Installs nginx. """
     os = utils.detect_os()
@@ -16,7 +14,7 @@ def nginx_install():
     run('rm -f /etc/nginx/sites-enabled/default')
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def nginx_setup():
     """ Updates nginx config and restarts nginx. """
     name = env.conf['INSTANCE_NAME']
@@ -26,11 +24,11 @@ def nginx_setup():
     run('invoke-rc.d nginx reload')
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def nginx_restart():
     run('invoke-rc.d nginx reload')
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def nginx_start():
     run('invoke-rc.d nginx start')

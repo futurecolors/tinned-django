@@ -13,14 +13,14 @@ __all__ = ['sphinx_setup', 'sphinx_config', 'sphinx_indexer', 'sphinx_start']
 SPHINX_CONFIG = '/etc/sphinxsearch/sphinx.conf'
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def sphinx_setup():
     ''' Install sphinx search '''
     aptitude_install('sphinxsearch')
     run('sed -i "s/START=no/START=yes/g" /etc/default/sphinxsearch')
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 @utils.inside_project
 def sphinx_config(apps):
     ''' Generate sphinx config from django '''
@@ -33,7 +33,7 @@ def sphinx_config(apps):
     sphinx_start()
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def make_log_files():
     ''' Generate sphinx config from django '''
     sphinx_config = run('cat {0}'.format(SPHINX_CONFIG))
@@ -43,7 +43,7 @@ def make_log_files():
             run('touch {0}'.format(option[1]))
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def sphinx_indexer():
     ''' Setup sphinx indexing '''
     indexer_command = 'indexer --all --rotate >/dev/null 2>&1'
@@ -51,7 +51,7 @@ def sphinx_indexer():
     crontab_update('0-59 * * * * {0}'.format(indexer_command), 'indexer')
 
 
-@utils.run_as('root')
+@utils.run_as_sudo
 def sphinx_start():
     ''' Run sphinx daemon '''
     run('/etc/init.d/sphinxsearch start')
