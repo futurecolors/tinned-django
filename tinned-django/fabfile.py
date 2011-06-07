@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-from fc.fabdeploy_extensions import start_project
+from fc.tin.start_project import make_django_project
 from _settings.environment.production import DATABASES as production_db
 from _settings.environment.staging import DATABASES as staging_db
 
+def create():
+    make_django_project()
 
 def production():
     env.hosts = ['{{ USERNAME }}@{{ SERVER_IP }}']

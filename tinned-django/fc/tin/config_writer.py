@@ -5,12 +5,17 @@ from random import choice
 from fabric.api import env
 from fabric.operations import local
 from fabric.context_managers import lcd
-from start_project import USERNAME
 
-def write_template(file, context):
+USERNAME = 'futurecolors'
+
+def write_template(filepath, context):
+    dir, file = os.path.split(filepath)
+    print dir
+    print file
+    print filepath
     jenv = Environment(loader=FileSystemLoader(dir))
     text = jenv.get_template(file).render(context)
-    f = open(file, 'w')
+    f = open(filepath, 'w')
     f.write(text.encode('UTF-8'))
 
 
@@ -20,7 +25,7 @@ def generate_password(length=10):
 
 
 def write_db_settings(environment):
-    write_template(os.path.join(env.working_dir, '_settings', 'environment', environment),
+    write_template(os.path.join(env.working_dir, '_settings', 'environment', '{0}.py'.format(environment)),
             {'DB_NAME': env.project_name,
              'DB_USER': USERNAME,
              'DB_PASSWORD': generate_password()})
@@ -28,10 +33,10 @@ def write_db_settings(environment):
 
 def write_fabfile():
     write_template(os.path.join(env.working_dir, 'fabfile.py'),
-            {'SERVER_IP': server_ip,
-             'SERVER_NAME': server_name,
-             'INSTANCE_NAME': project_name,
-             'DB_ROOT_PASSWORD': db_root_password,
+            {'SERVER_IP': env.server_ip,
+             'SERVER_NAME': env.server_name,
+             'INSTANCE_NAME': env.project_name,
+             'DB_ROOT_PASSWORD': generate_password(10),
              'USERNAME': USERNAME})
 
     
@@ -41,10 +46,10 @@ def write_secret_key():
 
 
 def write_project_name_in_css():
-    dir = os.path.join(env.working_dir, '_static', 'css')
-    for f in os.listdir(dir):
+    dirname = os.path.join(env.working_dir, '_static', 'css')
+    for f in os.listdir(dirname):
         if os.path.isfile(os.path.join(dirname, f)):
-            write_template(os.path.join(dir, f), {'PROJECT_NAME': env.project_name})
+            write_template(os.path.join(dirname, f), {'PROJECT_NAME': env.project_name})
 
 
 def create_settings_per_developer(developers, password):
@@ -62,5 +67,5 @@ def create_settings_per_developer(developers, password):
     with lcd(os.path.join(env.working_dir, '_settings', 'environment', 'users')):
         for user in developers:
             db_name  = '{0}_{1}'.format(env.project_name, user)
-            sql_set = sql_set_template.format(dict(DB_NAME=db_name, DB_USER=env.project_name, DB_PASSWORD=password))
+            sql_set = sql_set_template.format(DB_NAME=db_name, DB_USER=env.project_name, DB_PASSWORD=password)
             local('echo "{0}" > {1}.py'.format(sql_set, user))

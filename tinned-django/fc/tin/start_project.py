@@ -5,18 +5,18 @@ from fabric.operations import local, prompt
 from fabric.context_managers import lcd, settings, hide
 from fabric.api import env
 from fabric.utils import puts
-from mysql import *
+import mysql
 import config_writer
-from util import usernames_of_unixgroup
+from util import usernames_unixgroup
 
 
 BLANK_PROJECT_REPO = 'git://github.com/futurecolors/tinned-django.git'
 BLANK_PROJECT_BRANCH_NAME = 'master'
 BLANK_PROJECT_NAME = 'tinned-django'
 DEVELOPERS_USERGROUP = 'fcolors'
-DEVELOPERS = usernames_of_unixgroup(DEVELOPERS_USERGROUP)
+DEVELOPERS = usernames_unixgroup(DEVELOPERS_USERGROUP)
 DEV_DB_PASSWORD = config_writer.generate_password()
-USERNAME = 'futurecolors'
+
 
 def make_django_project(project_name=''):
 
@@ -58,14 +58,14 @@ def make_django_project(project_name=''):
             local('git clone {repo} --branch={branch} {dir}'.format(repo=BLANK_PROJECT_REPO,
                                                                     branch=BLANK_PROJECT_BRANCH_NAME,
                                                                     dir=env.project_name))
-            env.working_dir = '/tmp/{0}/{1}/'.format(project_name, BLANK_PROJECT_NAME)
+            env.working_dir = '/tmp/{0}/{1}/'.format(env.project_name, BLANK_PROJECT_NAME)
             local('rm -rf {0}/.git'.format(env.project_name))
 
         config_writer.write_db_settings('production')
         config_writer.write_db_settings('staging')
 
         config_writer.write_fabfile()
-        config_writer.write_project_name_in_сss()
+        config_writer.write_project_name_in_css()
         config_writer.write_secret_key()
         config_writer.create_settings_per_developer(DEVELOPERS, DEV_DB_PASSWORD)
 
@@ -95,7 +95,7 @@ def make_django_project(project_name=''):
 
     hello()
 
-    env.project_name = get_project_name(env.project_name)
+    env.project_name = get_project_name(project_name)
     env.server_ip = get_ip()
     env.server_name = get_server_name()
 
