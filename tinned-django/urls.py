@@ -34,7 +34,7 @@ if DEBUG == True:
     )
 
 # Приложения
-urlpatterns += patterns('', (r'', include('card.urls')))
+
 
 # Статика
 urlpatterns += staticfiles_urlpatterns()

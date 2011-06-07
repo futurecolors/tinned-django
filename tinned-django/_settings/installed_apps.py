@@ -7,7 +7,6 @@ INSTALLED_APPS = (
     # Приложения сторонних разработчиков
     'south',
     'sorl.thumbnail',
-    'pymorphy',
     'pytils',
     'indexer',
     'paging',

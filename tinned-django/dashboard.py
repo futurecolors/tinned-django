@@ -5,9 +5,8 @@ from django.core.urlresolvers import reverse
 from admin_tools.dashboard import Dashboard, modules
 from admin_tools.menu import Menu, items
 from admin_tools.utils import get_admin_site_name
-
 from fc.maintenance.dashboard import Maintenance
-from fc.redis_statistic.dashboard import RedisStatistic
+
 
 
 class AdminIndexDashboard(Dashboard):
@@ -18,7 +17,7 @@ class AdminIndexDashboard(Dashboard):
 
     class Media:
         css = ('css/dashboard.css',)
-        js =  ('js/plugins/form/jquery.form.js', 'js/admin/dashboard.js')
+        js =  ('js/plugins/form/jquery.form.js')
 
     def append_quick_links(self, context):
         site_name = get_admin_site_name(context)
