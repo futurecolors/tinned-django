@@ -1,4 +1,9 @@
-from fab_deploy import vcs, virtualenv, utils, crontab, mysql
+from fab_deploy.crontab import *
+from fab_deploy.mysql import *
+from fab_deploy.system import *
+from fab_deploy.virtualenv import *
+from fab_deploy.deploy import up
 from deploy import *
 from django_commands import *
 from system import *
+from extensions.uwsgi import *
