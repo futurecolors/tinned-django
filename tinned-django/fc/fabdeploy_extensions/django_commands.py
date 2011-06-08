@@ -65,4 +65,4 @@ def collectstatic(params=''):
 def compress(params=''):
     ''' Django-compressor '''
     with settings(warn_only=True):
-        manage('synccompress %s' % params)
+        manage('compress %s' % params)
