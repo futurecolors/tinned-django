@@ -5,7 +5,4 @@ FirePython==0.9
 PyYAML
 sorl-thumbnail==11.01
 pytils
-pymorphy
-simplejson
-selementtree
 
