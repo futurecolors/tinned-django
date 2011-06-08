@@ -1,4 +1,4 @@
-fabfile.py# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from jinja2 import Environment, FileSystemLoader
 from fabric.colors import green, red
 from fabric.operations import local, prompt
