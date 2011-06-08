@@ -13,7 +13,7 @@ def prepare_server():
         system.install_sudo()
 
     system.setup_backports()
-    fc_setup_testing_sources()
+    setup_testing_sources()
 
     mysql.mysql_install()
     with settings(hide('warnings', 'running', 'stdout', 'stderr'), warn_only=True):

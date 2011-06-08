@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+fabfile.py# -*- coding: utf-8 -*-
 from jinja2 import Environment, FileSystemLoader
 from fabric.colors import green, red
 from fabric.operations import local, prompt
@@ -14,12 +14,12 @@ BLANK_PROJECT_REPO = 'git://github.com/futurecolors/tinned-django.git'
 BLANK_PROJECT_BRANCH_NAME = 'master'
 BLANK_PROJECT_NAME = 'tinned-django'
 DEVELOPERS_USERGROUP = 'fcolors'
-DEVELOPERS = usernames_unixgroup(DEVELOPERS_USERGROUP)
 DEV_DB_PASSWORD = config_writer.generate_password()
 
 
 def make_django_project(project_name=''):
-
+    DEVELOPERS = usernames_unixgroup(DEVELOPERS_USERGROUP)
+    
     def hello():
         print (green('Создание репозитория с заготовкой Django-проекта', True))
 
