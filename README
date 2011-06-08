@@ -1,6 +1,7 @@
-tinned-django
-=============
+# tinned-django
 
 Сборка django + fabdeploy + батарейки для ежедневного использования
 
 Применяется в Future Colors
+
+Для успешной работы необходим https://github.com/futurecolors/django-fabdeploy-extensions
