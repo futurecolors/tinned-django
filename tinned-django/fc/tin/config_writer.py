@@ -8,14 +8,15 @@ from fabric.context_managers import lcd
 
 USERNAME = 'futurecolors'
 
-def write_template(filepath, context):
+def write_template(filepath, context, outputfilepath=None):
     dir, file = os.path.split(filepath)
     print dir
     print file
     print filepath
     jenv = Environment(loader=FileSystemLoader(dir))
     text = jenv.get_template(file).render(context)
-    f = open(filepath, 'w')
+    outputfilepath = outputfilepath or filepath
+    f = open(outputfilepath, 'w')
     f.write(text.encode('UTF-8'))
 
 

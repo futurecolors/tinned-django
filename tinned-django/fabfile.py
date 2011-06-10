@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from fc.tin.start_project import make_django_project
+from fc.tin.environment import setup_environment
 from fabdeploy_extensions import *
 from _settings.environment.production import DATABASES as production_db
 from _settings.environment.staging import DATABASES as staging_db
