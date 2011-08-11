@@ -44,10 +44,6 @@ def setup_environment():
                    'RELOAD_TXT': os.path.join('/home', developer, 'projects', project, 'reload.txt'),
                    'USER': developer,
                    'GROUP': DEVELOPERS_USERGROUP}
-        _write_root_config(relative_path='configs/webapp.xml',
-                           context=context,
-                           target_dir='/etc/uwsgi/',
-                           outfilepath = '/tmp/{0}.{1}.xml'.format(project, developer))
 
 
     def _create_nginx_config(project, developer):
