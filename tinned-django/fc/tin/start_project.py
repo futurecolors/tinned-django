@@ -26,7 +26,7 @@ def make_django_project(project_name=''):
 
     def get_project_name(project_name):
         if not project_name:
-            return prompt('Введите имя нового проекта: ', validate=r'\w+')
+            return prompt('Введите имя нового проекта: ', validate=r'[\w-]+')
         else:
             return project_name
 
@@ -36,7 +36,7 @@ def make_django_project(project_name=''):
 
 
     def get_server_name():
-        return prompt('Введите домен сервера (domain.com): ', validate=r'(\w+\.)?\w+\.\w+')
+        return prompt('Введите домен сервера (domain.com): ', validate=r'([\w-]+\.)?[\w-]+\.\w+')
 
 
     def success():

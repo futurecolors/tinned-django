@@ -44,6 +44,10 @@ def setup_environment():
                    'RELOAD_TXT': os.path.join('/home', developer, 'projects', project, 'reload.txt'),
                    'USER': developer,
                    'GROUP': DEVELOPERS_USERGROUP}
+        _write_root_config(relative_path='configs/webapp.xml',
+                           context=context,
+                           target_dir='/etc/uwsgi/',
+                           outfilepath = '/tmp/{0}.{1}.xml'.format(project, developer))
 
 
     def _create_nginx_config(project, developer):
@@ -65,8 +69,10 @@ def setup_environment():
                         _create_project(project)
                         _create_uwsgi_config(project, developer_name)
                         _create_nginx_config(project, developer_name)
-                local('sudo chown -R {user}:{group} /home/{user}/projects/'.format(user=developer_name, group=DEVELOPERS_USERGROUP))
-                local('sudo chmod -R 755 /home/{user}/projects/'.format(user=developer_name))
+                        local('sudo chown -R {user}:{group} /home/{user}/projects/{project}/'.format(user=developer_name, group=DEVELOPERS_USERGROUP,
+                                                                                                    project=project))
+                        local('sudo chmod -R 755 /home/{user}/projects/{project}/'.format(user=developer_name, project=project))
+
 
         
     print (green('Создаём инфраструктуру для разработчиков', True))

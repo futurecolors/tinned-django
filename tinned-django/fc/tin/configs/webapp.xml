@@ -1,0 +1,17 @@
+<uwsgi>
+    <socket>{{ SOCKET_PATH }}</socket>
+    <chmod-socket>777</chmod-socket>
+    <uid>{{ USER }}</uid>
+    <gid>{{ GROUP }}</gid>
+    <vacuum/>
+    <no-orphans/>
+    <module>django.core.handlers.wsgi:WSGIHandler()</module>
+    <pythonpath>{{ PROJECT_PATH }}</pythonpath>
+    <virtualenv>{{ PATH_TO_VIRTUALENV }}</virtualenv>
+    <env>DJANGO_SETTINGS_ENVIRONMENT=development</env>
+    <env>DJANGO_SETTINGS_MODULE=settings</env>
+    <env>USER={{ USER }}</env>
+    <catch-exceptions/>
+    <touch-reload>{{ RELOAD_TXT }}</touch-reload>
+    <logto>/var/log/uwsgi/{{ SERVER_NAME }}.log</logto>
+</uwsgi>
