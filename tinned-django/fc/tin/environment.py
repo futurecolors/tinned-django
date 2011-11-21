@@ -43,7 +43,8 @@ def setup_environment():
                    'PROJECT_PATH': os.path.join('/home', developer, 'projects', project, 'src'),
                    'RELOAD_TXT': os.path.join('/home', developer, 'projects', project, 'reload.txt'),
                    'USER': developer,
-                   'GROUP': DEVELOPERS_USERGROUP}
+                   'GROUP': DEVELOPERS_USERGROUP,
+                   'SERVER_NAME': '{0}.{1}'.format(project, developer)}
         _write_root_config(relative_path='configs/webapp.xml',
                            context=context,
                            target_dir='/etc/uwsgi/',
