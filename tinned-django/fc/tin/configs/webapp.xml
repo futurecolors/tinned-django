@@ -14,4 +14,5 @@
     <catch-exceptions/>
     <touch-reload>{{ RELOAD_TXT }}</touch-reload>
     <logto>/var/log/uwsgi/{{ SERVER_NAME }}.log</logto>
+    <logfile-chown>{{ USER }}</logfile-chown>
 </uwsgi>
