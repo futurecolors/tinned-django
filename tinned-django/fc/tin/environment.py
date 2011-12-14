@@ -25,7 +25,7 @@ def setup_environment():
         local('sudo mkdir -p {0}'.format(name))
         with lcd(name):
             local('sudo mkdir -p src')
-            local('sudo virtualenv --no-site-packages env')
+            local('sudo virtualenv --no-site-packages env --python=python2.7 --clear')
             local('sudo touch reload.txt')
 
 

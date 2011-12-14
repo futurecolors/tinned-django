@@ -43,7 +43,7 @@ def mysql_create_user(user, password):
     if mysql_user_exists(user):
         puts('Учётная запись для {0} уже существует. PASS'.format(user))
         return
-    sql = MYSQL_CREATE_USER.format(env.project_name, password)
+    sql = MYSQL_CREATE_USER.format(user, password)
     mysql_execute(sql, 'root')
 
 def mysql_grant_permissions(user):

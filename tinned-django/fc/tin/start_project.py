@@ -5,6 +5,7 @@ from fabric.operations import local, prompt
 from fabric.context_managers import lcd, settings, hide
 from fabric.api import env
 from fabric.utils import puts
+from fabric.contrib.files import exists
 import mysql
 import config_writer
 from util import usernames_unixgroup
@@ -13,7 +14,7 @@ from util import usernames_unixgroup
 BLANK_PROJECT_REPO = 'git://github.com/futurecolors/tinned-django.git'
 BLANK_PROJECT_BRANCH_NAME = 'master'
 BLANK_PROJECT_NAME = 'tinned-django'
-DEVELOPERS_USERGROUP = 'fcolors'
+DEVELOPERS_USERGROUP = 'uwsgi_test'
 DEV_DB_PASSWORD = config_writer.generate_password()
 
 
