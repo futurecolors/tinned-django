@@ -4,7 +4,7 @@ DEBUG = False
 
 DATABASES = {
     'default': {
-        'NAME': '{{ DB_NAME }}_staging',
+        'NAME': '{{ DB_NAME }}',
         'ENGINE': 'django.db.backends.mysql',
         'USER': '{{ DB_USER }}',
         'PASSWORD': '{{ DB_PASSWORD }}',
@@ -26,7 +26,7 @@ CACHES = {
     },
 }
 THUMBNAIL_REDIS_DB = 2
+BROKER_URL = "redis://localhost:6379/2"
 
-# Compress by default
-COMPRESS = True
+COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True

@@ -17,11 +17,5 @@ PROFILER_ENABLED = False
 # Настройки Sentry
 SENTRY_ENABLED = True
 
-# Firelogger
-FIRELOGGER = False
-
-# Дебаг SQL в Firepython
-FIREPYTHON_SQL = False
-
 # Настройки логирования
 logging.config.fileConfig(ROOT_PATH + '/_settings/applications/logging.ini')

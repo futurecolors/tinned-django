@@ -42,7 +42,7 @@ def write_fabfile():
 
     
 def write_secret_key():
-    write_template(os.path.join(env.working_dir, 'settings.py'),
+    write_template(os.path.join(env.working_dir, '_settings', '__init__.py'),
             {'SECRET_KEY': generate_password(50)})
 
 
@@ -52,6 +52,9 @@ def write_project_name_in_css():
         if os.path.isfile(os.path.join(dirname, f)):
             write_template(os.path.join(dirname, f), {'PROJECT_NAME': env.project_name})
 
+
+def write_managepy():
+        write_template(os.path.join(env.working_dir, 'manage.py'), {'PROJECT_NAME': env.project_name})
 
 def create_settings_per_developer(developers, password):
     sql_set_template = """DATABASES = {{

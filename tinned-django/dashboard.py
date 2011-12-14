@@ -7,12 +7,13 @@ from admin_tools.menu import Menu, items
 from admin_tools.utils import get_admin_site_name
 from fc.maintenance.dashboard import Maintenance
 
+MODELS = [
 
+]
 
 class AdminIndexDashboard(Dashboard):
     def init_with_context(self, context):
         self.append_applications()
-        self.append_maintenance()
         self.append_quick_links(context)
 
     class Media:
@@ -39,9 +40,6 @@ class AdminIndexDashboard(Dashboard):
             exclude=('django.contrib.*',),
         ))
 
-    def append_maintenance(self):
-        self.children.append(Maintenance(title=u'Выключение сайта'))
-
 
 class AdminMenu(Menu):
     def __init__(self, **kwargs):
@@ -56,6 +54,11 @@ class AdminMenu(Menu):
 
     def applist(self):
         return items.AppList(_('Applications'))
+
+#    def applist(self):
+#        children_items = [items.ModelList(title=title, models=models)
+#                          for title, models in MODELS]
+#        return items.MenuItem(u'Приложения', children=children_items)
 
     def bookmarks(self):
         return items.Bookmarks(_('Bookmarks'))

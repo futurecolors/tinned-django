@@ -67,6 +67,7 @@ def make_django_project(project_name=''):
         config_writer.write_fabfile()
         config_writer.write_project_name_in_css()
         config_writer.write_secret_key()
+        config_writer.write_managepy()
         config_writer.create_settings_per_developer(DEVELOPERS, DEV_DB_PASSWORD)
 
         with lcd('/tmp/{0}/{1}'.format(env.project_name, BLANK_PROJECT_NAME)):

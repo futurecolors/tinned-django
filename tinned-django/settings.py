@@ -1,57 +1,71 @@
 # -*- coding: utf-8 -*-
-import os, sys
+from _settings import *
 
-# Root-директория
-ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
-sys.path.append(ROOT_PATH)
+STATIC_ROOT = ROOT_PATH + '/static'
 
-# Кодовое название проекта
-PROJECT_NAME = '{{ PROJECT_NAME }}'
-
-# Название сайта
-SITE_NAME = '{{ PROJECT_NAME }}'
-
-# окружение (development либо production)
-DJANGO_SETTINGS_ENVIRONMENT = os.environ.get('DJANGO_SETTINGS_ENVIRONMENT') or 'development'
-
-# Устанавливаем значение DEBUG
-if DJANGO_SETTINGS_ENVIRONMENT == 'development':
-    DEBUG = True
-else:
-    DEBUG = False
-
-# Время и языки
-TIME_ZONE = 'Europe/Moscow'
-LANGUAGE_CODE = 'ru-RU'
-USE_I18N = True
-USE_L10N = True
-
-# Для Sites framework
-SITE_ID = 1
-
-# Урлы
-ROOT_URLCONF = 'urls'
-
-# Секретный ключ
-SECRET_KEY = '{{ SECRET_KEY }}'
+INSTALLED_APPS = (
+    # Приложения проекта 'apps.*'
 
 
-# Системные настройки
-from _settings.media import *
-from _settings.template import *
-from _settings.session import *
-from _settings.cache import *
-from _settings.email import *
+    # Приложения сторонних разработчиков
+    'south',
+    'sorl.thumbnail',
+    'pytils',
+    'pymorphy',
+    'indexer',
+    'paging',
+    'sentry',
+    'sentry.client',
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
+    'compressor',
+    'django_any',
+    'django_jenkins',
+    'mptt',
+    'widget_tweaks',
+    'djangosphinx',
+    'guardian',
+    'djcelery',
+
+    # Чужие приложения, которые хорошо бы форкнуть
+
+    # Наши приложения
+    'fc.maintenance',
+    'fc.weightmixin',
+
+    # Приложения Django
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.admin',
+    'django.contrib.staticfiles',
+    )
+
+# djCelery
+import djcelery
+djcelery.setup_loader()
+
+# Для django-jenkins
+PROJECT_APPS = [app for app in INSTALLED_APPS if app.startswith('apps.')]
 
 
-# Настройки приложений
-from _settings.applications import *
+# local settings
+try:
+    from _settings.environment.local import *
+except ImportError:
+    pass
 
+test_selenium_flags = ['test_selenium']
+IS_SELENIUM = bool(filter(lambda x: x in sys.argv, test_selenium_flags))
 
-# Настройки для окружений
-execfile('{0}/_settings/environment/{1}.py'.format(ROOT_PATH, DJANGO_SETTINGS_ENVIRONMENT))
+if IS_SELENIUM:
+    try:
+        from _settings.environment.selenium import *
+    except ImportError:
+        pass
 
-
-# Подключение настроек
-from _settings.middlewares import *
-from _settings.installed_apps import *
+# hack for jenkins selenium
+if 'jenkins' in sys.argv and 'selenium_tests' in sys.argv:
+    TEST_RUNNER = 'selenium_tests.runners.JenkinsTestRunner'

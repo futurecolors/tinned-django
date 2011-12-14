@@ -1,6 +1,9 @@
+/.idea
 /.pydevproject
 /.externalToolBuilders
 /.project
 /.settings
 /src
 *.pyc
+_settings/environment/local.py
+/log.txt

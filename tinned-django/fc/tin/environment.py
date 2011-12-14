@@ -55,7 +55,7 @@ def setup_environment():
         context = {'SOCKET_PATH': get_socket_path(project, developer),
                    'PROJECT_PATH': os.path.join('/home', developer, 'projects', project, 'src'),
                    'SERVER_IP': socket.gethostbyname('{0}.{1}.fcdev.ru'.format(project, developer)),
-                   'SERVER_NAME': '{0}.{1}'.format(project, developer)}
+                   'SERVER_NAME': '{0}.{1}'.format(project, developer),}
         _write_root_config(relative_path='configs/nginx.config',
                            context=context,
                            target_dir='/etc/nginx/fc/',

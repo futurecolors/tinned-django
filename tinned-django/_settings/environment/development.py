@@ -30,3 +30,6 @@ try:
     execfile('{0}/_settings/environment/users/{1}.py'.format(ROOT_PATH, os.environ.get('USER')))
 except Exception:
     pass
+
+# Не надо добавлять сюда настройки, т.к. их нельзя будет переопределить в юзерконфигах
+# Добавляйте новые настройки перед execfile

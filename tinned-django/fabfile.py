@@ -24,9 +24,9 @@ def production():
         GIT_BRANCH              = 'master',
         LOCAL_CONFIG            = '__init__.py',
         REMOTE_CONFIG_TEMPLATE  = '__init__.py',
-        PIP_REQUIREMENTS_PATH   = '_settings/fab_deploy/reqs',
-        PIP_REQUIREMENTS_ACTIVE = 'active.txt',
-        CONFIG_TEMPLATES_PATHS  = ['_settings/fab_deploy/config_templates'],
+        PIP_REQUIREMENTS_PATH   = '',
+        PIP_REQUIREMENTS_ACTIVE = 'reqs.txt',
+        CONFIG_TEMPLATES_PATHS  = ['_settings/config_templates'],
         OS                      = 'squeeze',
     )
     update_env()
@@ -47,15 +47,38 @@ def staging():
         DB_PASSWORD             = staging_db['default']['PASSWORD'],
         DB_ROOT_PASSWORD        = '{{ DB_ROOT_PASSWORD }}',
         VCS                     = 'git',
-        GIT_BRANCH              = 'master',
+        GIT_BRANCH              = 'dev',
         LOCAL_CONFIG            = '__init__.py',
         REMOTE_CONFIG_TEMPLATE  = '__init__.py',
-        PIP_REQUIREMENTS_PATH   = '_settings/fab_deploy/reqs',
-        PIP_REQUIREMENTS_ACTIVE = 'active.txt',
-        CONFIG_TEMPLATES_PATHS  = ['_settings/fab_deploy/config_templates'],
+        PIP_REQUIREMENTS_PATH   = '',
+        PIP_REQUIREMENTS_ACTIVE = 'reqs.txt',
+        CONFIG_TEMPLATES_PATHS  = ['_settings/config_templates'],
         OS                      = 'squeeze',
     )
     update_env()
 
 def stable():
     return staging()
+
+
+def testing():
+    env.hosts = ['{{ USERNAME }}@{{ SERVER_IP }}']
+    env.conf = dict(
+        SERVER_NAME             = 'testing.{{ SERVER_NAME }}',
+        INSTANCE_NAME           = '{{ INSTANCE_NAME }}_testing',
+        SUDO_USER               = '{{ USERNAME }}',
+        NAME                    = 'testing',
+        DB_NAME                 = staging_db['default']['NAME'],
+        DB_USER                 = staging_db['default']['USER'],
+        DB_PASSWORD             = staging_db['default']['PASSWORD'],
+        DB_ROOT_PASSWORD        = '{{ DB_ROOT_PASSWORD }}',
+        VCS                     = 'git',
+        GIT_BRANCH              = 'dev',
+        LOCAL_CONFIG            = '__init__.py',
+        REMOTE_CONFIG_TEMPLATE  = '__init__.py',
+        PIP_REQUIREMENTS_PATH   = '',
+        PIP_REQUIREMENTS_ACTIVE = 'reqs.txt',
+        CONFIG_TEMPLATES_PATHS  = ['_settings/config_templates'],
+        OS                      = 'squeeze',
+    )
+    update_env()
