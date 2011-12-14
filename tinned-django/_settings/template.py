@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from settings import ROOT_PATH, DEBUG
+from _settings import ROOT_PATH, DEBUG
 
 # Настройки шаблонов
 TEMPLATE_CONTEXT_PROCESSORS = (

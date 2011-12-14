@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from settings import PROJECT_NAME
+from _settings import PROJECT_NAME
 
 # Сессии
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
