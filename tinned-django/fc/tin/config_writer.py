@@ -47,7 +47,7 @@ def write_secret_key():
 
 
 def write_project_name_in_css():
-    dirname = os.path.join(env.working_dir, '_static', 'css')
+    dirname = os.path.join(env.working_dir, 'static', 'css')
     for f in os.listdir(dirname):
         if os.path.isfile(os.path.join(dirname, f)):
             write_template(os.path.join(dirname, f), {'PROJECT_NAME': env.project_name})
