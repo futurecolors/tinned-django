@@ -102,6 +102,6 @@ def make_django_project(project_name=''):
     env.server_name = get_server_name()
 
     git_prepare()
-#    mysql.create_dbs_and_users(DEVELOPERS, DEV_DB_PASSWORD)
+    mysql.create_dbs_and_users(DEVELOPERS, DEV_DB_PASSWORD)
 
     success()

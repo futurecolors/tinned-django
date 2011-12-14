@@ -25,7 +25,7 @@ def setup_environment():
         local('sudo mkdir -p {0}'.format(name))
         with lcd(name):
             local('sudo mkdir -p src')
-            local('sudo virtualenv --no-site-packages env --python=python2.7 --clear')
+            local('sudo virtualenv --no-site-packages env --python=python2.7')
             local('sudo touch reload.txt')
 
 
@@ -71,8 +71,8 @@ def setup_environment():
                         _create_project(project)
                         _create_uwsgi_config(project, developer_name)
                         _create_nginx_config(project, developer_name)
-#                        local('sudo chown -R {user}:{group} /home/{user}/projects/{project}/'.format(user=developer_name, group=DEVELOPERS_USERGROUP, project=project))
-#                        local('sudo chmod -R 755 /home/{user}/projects/{project}/'.format(user=developer_name, project=project))
+                        local('sudo chown -R {user}:{group} /home/{user}/projects/{project}/'.format(user=developer_name, group=DEVELOPERS_USERGROUP, project=project))
+                        local('sudo chmod -R 755 /home/{user}/projects/{project}/'.format(user=developer_name, project=project))
 
 
         
