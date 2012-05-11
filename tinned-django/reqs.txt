@@ -9,6 +9,7 @@ progressbar==2.3
 django-guardian==1.0.3
 selenium==2.13.1
 splinter==0.4
+ipython
 
 # Must-have packages
 PIL==1.1.7
