@@ -64,6 +64,7 @@ def make_django_project(project_name=''):
 
         config_writer.write_db_settings('production')
         config_writer.write_db_settings('staging')
+        config_writer.write_db_settings('remote_testing')
 
         config_writer.write_fabfile()
         config_writer.write_project_name_in_css()

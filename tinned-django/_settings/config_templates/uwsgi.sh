@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PYTHONPATH={{ PROJECT_DIR }}
-MODULE=wsgi
+MODULE="django.core.handlers.wsgi:WSGIHandler()"
 
 ### BEGIN INIT INFO
 # Provides:          uwsgi
@@ -25,7 +25,15 @@ test -x $DAEMON || exit 0
 
 set -e
 
-DAEMON_OPTS="-s 127.0.0.1:4000 -M 4 -t 30 -A 4 -p 4 -d /var/log/uwsgi/uwsgi.log --pythonpath $PYTHONPATH --module $MODULE --home {{ ENV_DIR }}/"
+DAEMON_OPTS="-s /tmp/{{ SERVER_NAME }}.sock \
+--chmod-socket 644 \
+--master \
+--harakiri 30 \
+--processes 8  \
+--listen 1024 \
+--daemonize /var/log/uwsgi/{{ SERVER_NAME }}.log \
+--pythonpath $PYTHONPATH --module $MODULE \
+--env DJANGO_SETTINGS_ENVIRONMENT={{ NAME }} --env DJANGO_SETTINGS_MODULE=settings --home {{ ENV_DIR }}/"
 
 case "$1" in
   start)

@@ -30,3 +30,4 @@ django-compressor==1.0.1
 django-whatever==0.1
 django-jenkins==0.11.1
 mock==0.7.2
+BeautifulSoup==3.2.1

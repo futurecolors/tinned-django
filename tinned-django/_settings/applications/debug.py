@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from settings import ROOT_PATH
 import logging.config
+import os
 
 # Настройка панели дебага
 DEBUG_TOOLBAR_ENABLED = False
@@ -18,4 +18,5 @@ PROFILER_ENABLED = False
 SENTRY_ENABLED = True
 
 # Настройки логирования
-logging.config.fileConfig(ROOT_PATH + '/_settings/applications/logging.ini')
+PATH = os.path.abspath(os.path.dirname(__file__))
+logging.config.fileConfig(PATH + '/logging.ini')

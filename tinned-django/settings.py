@@ -33,7 +33,6 @@ INSTALLED_APPS = (
 
     # Наши приложения
     'fc.maintenance',
-    'fc.weightmixin',
 
     # Приложения Django
     'django.contrib.auth',

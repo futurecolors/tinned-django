@@ -4,6 +4,7 @@ from fc.tin.environment import setup_environment
 from fabdeploy_extensions import *
 from _settings.environment.production import DATABASES as production_db
 from _settings.environment.staging import DATABASES as staging_db
+from _settings.environment.remote_testing import DATABASES as testing_db
 from fab_deploy.utils import update_env
 
 def create():
@@ -25,7 +26,7 @@ def production():
         LOCAL_CONFIG            = '__init__.py',
         REMOTE_CONFIG_TEMPLATE  = '__init__.py',
         PIP_REQUIREMENTS_PATH   = '',
-        PIP_REQUIREMENTS_ACTIVE = 'reqs.txt',
+        PIP_REQUIREMENTS        = 'reqs.txt',
         CONFIG_TEMPLATES_PATHS  = ['_settings/config_templates'],
         OS                      = 'squeeze',
     )
@@ -51,7 +52,7 @@ def staging():
         LOCAL_CONFIG            = '__init__.py',
         REMOTE_CONFIG_TEMPLATE  = '__init__.py',
         PIP_REQUIREMENTS_PATH   = '',
-        PIP_REQUIREMENTS_ACTIVE = 'reqs.txt',
+        PIP_REQUIREMENTS        = 'reqs.txt',
         CONFIG_TEMPLATES_PATHS  = ['_settings/config_templates'],
         OS                      = 'squeeze',
     )
@@ -67,17 +68,17 @@ def testing():
         SERVER_NAME             = 'testing.{{ SERVER_NAME }}',
         INSTANCE_NAME           = '{{ INSTANCE_NAME }}_testing',
         SUDO_USER               = '{{ USERNAME }}',
-        NAME                    = 'testing',
-        DB_NAME                 = staging_db['default']['NAME'],
-        DB_USER                 = staging_db['default']['USER'],
-        DB_PASSWORD             = staging_db['default']['PASSWORD'],
+        NAME                    = 'remote_testing',
+        DB_NAME                 = testing_db['default']['NAME'],
+        DB_USER                 = testing_db['default']['USER'],
+        DB_PASSWORD             = testing_db['default']['PASSWORD'],
         DB_ROOT_PASSWORD        = '{{ DB_ROOT_PASSWORD }}',
         VCS                     = 'git',
         GIT_BRANCH              = 'dev',
         LOCAL_CONFIG            = '__init__.py',
         REMOTE_CONFIG_TEMPLATE  = '__init__.py',
         PIP_REQUIREMENTS_PATH   = '',
-        PIP_REQUIREMENTS_ACTIVE = 'reqs.txt',
+        PIP_REQUIREMENTS        = 'reqs.txt',
         CONFIG_TEMPLATES_PATHS  = ['_settings/config_templates'],
         OS                      = 'squeeze',
     )
