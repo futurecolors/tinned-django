@@ -1,6 +1,9 @@
 Tinned Django v.0.1
 -------------------
 
+.. image:: https://travis-ci.org/futurecolors/tinned-django.png?branch=master
+    :target: https://travis-ci.org/futurecolors/tinned-django
+
 Tinned Django is a custom project template used at `Future Colors`_.
 Meant to be used with python 2.6-2.7.
 
@@ -34,15 +37,15 @@ Open tinned can with Django::
 Environments
 ^^^^^^^^^^^^
 
-=============  ============
+=============  ===================================================
  Environment    Description
-=============  ============
+=============  ===================================================
 BaseSettings   Defaults for all other environments, safe and sound
 Development    Local development
 Testing        Running tests
 Staging        Pre-production, for per-release deploys
 Production     No comments
-=============  ============
+=============  ===================================================
 
 Contributing
 ~~~~~~~~~~~~
@@ -58,7 +61,7 @@ Changelog
 ^^^^^^^^^^^^^^^^
 * First proper release
 
-Previous (undocumented) version of tinned-django is available in ``ancient`` branch.
+Previous (undocumented) version of tinned-django is available in `ancient`_ branch.
 
 See also
 ~~~~~~~~
@@ -69,6 +72,7 @@ See also
 
 .. _Future Colors: http://futurecolors.ru
 .. _Class-based settings: http://django-configurations.readthedocs.org/
+.. _ancient: https://github.com/futurecolors/tinned-django/tree/ancient
 .. _Django HTML5Boilerplate and Twitter Bootstrap template: https://github.com/xenith/django-base-template
-.. _Andrew McCloud's template:: https://github.com/amccloud/django-project-skel
+.. _Andrew McCloud's template: https://github.com/amccloud/django-project-skel
 
