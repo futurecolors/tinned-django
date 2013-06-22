@@ -1,7 +1,8 @@
-Tinned Django
--------------
+Tinned Django v.0.1
+-------------------
 
 Tinned Django is a custom project template used at `Future Colors`_.
+Meant to be used with python 2.6-2.7.
 
 .. warning::
     Work in progress!
@@ -24,21 +25,40 @@ Enforce best practices for new projects based on Django.
 Usage
 ~~~~~
 
-Since Django doesn't support arbitrary custom variables in project
-tempates by default it's preferred way to install and create new project
+Install Django 1.4+ so that ``django-admin.py`` is available.
 
-* ``pip install tinned-django``
-* ``open_can <yourprojectname> --var=XXX=yyy``
+Open tinned can with Django::
 
-However, if you wish to use default startproject command without extra
-variables substitution::
+    $ django-admin.py startproject <yourprojectname> --template https://github.com/futurecolors/tinned-django/zipball/master --extension py,gitignore
 
-* ``django-admin.py startproject <yourprojectname> --template https://github.com/futurecolors/tinned-django/zipball/master --extension py,md,gitignore`
+Environments
+^^^^^^^^^^^^
 
-History
-~~~~~~~
+=============  ============
+ Environment    Description
+=============  ============
+BaseSettings   Defaults for all other environments, safe and sound
+Development    Local development
+Testing        Running tests
+Staging        Pre-production, for per-release deploys
+Production     No comments
+=============  ============
 
-Previous (unreleased) version of tinned-django is available in ``ancient`` branch.
+Contributing
+~~~~~~~~~~~~
+::
+
+    $ pip install -r requirements.txt
+    $ nosetests
+
+Changelog
+~~~~~~~~~
+
+0.1 (22-06-2012)
+^^^^^^^^^^^^^^^^
+* First proper release
+
+Previous (undocumented) version of tinned-django is available in ``ancient`` branch.
 
 See also
 ~~~~~~~~

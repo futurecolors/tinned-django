@@ -1,0 +1,13 @@
+# coding: utf-8
+from django_config import *
+from apps_config import *
+
+
+class DjangoSettings(DatabaseSettings, CacheSettings, LocaleSettings, LoggingSettings,
+                     MediaSettings, MiddlewareSettings, SessionSettings, TemplateSettings):
+    pass
+
+
+class AppsSettings(AdminTools, CelerySettings, CkeditorSettings, CompressSettings,
+                   DebugSettings, PyMorphy, ThumbnailSettings):
+    pass
