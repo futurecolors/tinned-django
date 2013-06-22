@@ -30,6 +30,8 @@ Install Django 1.4+ so that ``django-admin.py`` is available.
 Open tinned can with Django::
 
     $ django-admin.py startproject <yourprojectname> --template https://github.com/futurecolors/tinned-django/zipball/master --extension py,gitignore
+    $ mv tinned_django/<yourprojectname> <yourprojectname>
+    $ rm -r tinned_django
 
 Environments
 ^^^^^^^^^^^^
