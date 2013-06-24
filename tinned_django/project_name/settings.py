@@ -42,6 +42,7 @@ class BaseSettings(DjangoSettings, AppsSettings, Settings):
             'guardian',
             'djcelery',
             'ckeditor',
+            'waffle',
 
             # Django
             'django.contrib.auth',

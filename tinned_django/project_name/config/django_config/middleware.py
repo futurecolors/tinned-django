@@ -12,6 +12,7 @@ class MiddlewareSettings(object):
             'django.contrib.sessions.middleware.SessionMiddleware',
             'django.contrib.auth.middleware.AuthenticationMiddleware',
             'django.contrib.messages.middleware.MessageMiddleware',
+            'waffle.middleware.WaffleMiddleware',
         ]
         if self.DEBUG and self.DEBUG_TOOLBAR_ENABLED:
             middleware_classes.append('debug_toolbar.middleware.DebugToolbarMiddleware')
