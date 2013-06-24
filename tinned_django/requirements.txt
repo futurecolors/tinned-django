@@ -28,6 +28,8 @@ pymorphy==0.5.6
 sorl-thumbnail==11.01
 django-sortable-fc==1.0
 django-waffle==0.9.1
+django-floppyforms==1.1
+django-extensions==1.1.1
 
 # Tests
 mock==1.0.0

@@ -36,15 +36,11 @@ Open tinned can with Django::
 Environments
 ^^^^^^^^^^^^
 
-=============  ===================================================
- Environment    Description
-=============  ===================================================
-BaseSettings   Defaults for all other environments, safe and sound
-Development    Local development
-Testing        Running tests
-Staging        Pre-production, for per-release deploys
-Production     No comments
-=============  ===================================================
+:BaseSettings:  Defaults for all other environments, safe and sound
+:Development:   Local development
+:Testing:       Running tests
+:Staging:       Pre-production, for per-release deploys
+:Production:    No comments
 
 Contributing
 ~~~~~~~~~~~~
@@ -55,6 +51,10 @@ Contributing
 
 Changelog
 ~~~~~~~~~
+
+0.2 (24-06-2012)
+^^^^^^^^^^^^^^^^
+* Added waffle, floppyforms, extensions.
 
 0.1 (22-06-2012)
 ^^^^^^^^^^^^^^^^

@@ -43,6 +43,8 @@ class BaseSettings(DjangoSettings, AppsSettings, Settings):
             'djcelery',
             'ckeditor',
             'waffle',
+            'floppyforms',
+            'django_extensions',
 
             # Django
             'django.contrib.auth',
