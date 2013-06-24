@@ -45,6 +45,7 @@ class BaseSettings(DjangoSettings, AppsSettings, Settings):
             'waffle',
             'floppyforms',
             'django_extensions',
+            'raven.contrib.django.raven_compat',
 
             # Django
             'django.contrib.auth',

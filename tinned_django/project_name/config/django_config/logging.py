@@ -8,7 +8,7 @@ class LoggingSettings(object):
         """ Allows using os.path.join """
         return {
             'version': 1,
-            'disable_existing_loggers': False,
+            'disable_existing_loggers': True,
             'root': {
                 'level': 'WARNING',
                 'handlers': ['sentry'],
@@ -21,7 +21,7 @@ class LoggingSettings(object):
             'handlers': {
                 'sentry': {
                     'level': 'ERROR',
-                    'class': 'raven.contrib.django.handlers.SentryHandler',
+                    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
                 },
                 'console': {
                     'level': 'DEBUG',

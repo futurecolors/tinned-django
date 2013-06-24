@@ -24,4 +24,12 @@ class DebugSettings(object):
 
     PROFILER_ENABLED = False
 
-    SENTRY_ENABLED = True
+    # empty for no logging
+    # http://raven.readthedocs.org/en/latest/config/django.html
+    RAVEN_CONFIG = {
+        'dsn': '',  # http://public:secret@example.com/1
+    }
+
+    # 404 Logging           http://raven.readthedocs.org/en/latest/config/django.html?highlight=sentry404catchmiddleware#logging
+    # Message Reference     http://raven.readthedocs.org/en/latest/config/django.html?highlight=sentry404catchmiddleware#message-references
+    RAVEN_MIDDLEWARES_ENABLED = True
