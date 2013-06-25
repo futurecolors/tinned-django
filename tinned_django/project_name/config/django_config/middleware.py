@@ -18,6 +18,6 @@ class MiddlewareSettings(object):
             middleware_classes.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
         if self.RAVEN_MIDDLEWARES_ENABLED:
-            middleware_classes.extend(['sentry.client.middleware.SentryResponseErrorIdMiddleware',
+            middleware_classes.extend(['raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
                                        'raven.contrib.django.middleware.Sentry404CatchMiddleware'])
         return tuple(middleware_classes)

@@ -1,4 +1,4 @@
-Tinned Django v.0.1
+Tinned Django v.0.2
 -------------------
 
 .. image:: https://travis-ci.org/futurecolors/tinned-django.png?branch=master
@@ -52,9 +52,11 @@ Contributing
 Changelog
 ~~~~~~~~~
 
-0.2 (24-06-2012)
+0.2 (25-06-2012)
 ^^^^^^^^^^^^^^^^
-* Added waffle, floppyforms, extensions.
+* Added waffle, floppyforms, extensions
+* Fixed raven config
+* Fixed static urls
 
 0.1 (22-06-2012)
 ^^^^^^^^^^^^^^^^
