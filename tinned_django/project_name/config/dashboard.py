@@ -46,7 +46,6 @@ class AdminMenu(Menu):
         super(AdminMenu, self).__init__(**kwargs)
         self.children += [self.link_to_home(),
                           self.bookmarks(),
-                          self.link_to_sentry(),
                           self.link_to_site()]
 
     def link_to_home(self):
