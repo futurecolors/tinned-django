@@ -1,11 +1,11 @@
-Tinned Django v.0.2
+Tinned Django v.0.3
 -------------------
 
 .. image:: https://travis-ci.org/futurecolors/tinned-django.png?branch=master
     :target: https://travis-ci.org/futurecolors/tinned-django
 
 Tinned Django is a custom project template used at `Future Colors`_.
-Meant to be used with python 2.6-2.7.
+Meant to be used with python 2.7.
 
 .. note::
     This is **NOT** a general purpose template.
@@ -36,11 +36,26 @@ Open tinned can with Django::
 Environments
 ^^^^^^^^^^^^
 
+These are defaults for all kinds of environments, specified by ``DJANGO_CONFIGURATION``
+They're defined in ``{{ project_name}}.settings`` module.
+
 :BaseSettings:  Defaults for all other environments, safe and sound
-:Development:   Local development
+:BaseLive:      Local development
+:Live:          Nightly/daily/hourly builds, includes local settings per developer
 :Testing:       Running tests
-:Staging:       Pre-production, for per-release deploys
+:Rc:            Pre-production, for per-release deploys
 :Production:    No comments
+
+
+Local settings
+^^^^^^^^^^^^^^
+
+Local settings, for each developer that are in effect in ``Live`` environment
+are defined in ``{{ project_name}}.live_settings`` module.
+Each mixin should be regular CBS mixin, named after developer USER env variable
+with first letter captialized. Example: ``USER=prophet -> class Prophet(object): pass``
+These settings are checked into repository for easy developement.
+
 
 Contributing
 ~~~~~~~~~~~~
@@ -49,20 +64,6 @@ Contributing
     $ pip install -r requirements.txt
     $ nosetests
 
-Changelog
-~~~~~~~~~
-
-0.2 (25-06-2012)
-^^^^^^^^^^^^^^^^
-* Added waffle, floppyforms, extensions
-* Fixed raven config
-* Fixed static urls
-
-0.1 (22-06-2012)
-^^^^^^^^^^^^^^^^
-* First proper release
-
-Previous (undocumented) version of tinned-django is available in `ancient`_ branch.
 
 See also
 ~~~~~~~~

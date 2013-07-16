@@ -1,8 +1,10 @@
 # coding: utf-8
 """ Class-based settings for different configurations
 """
+import logging
 import os
 from configurations import Settings
+from django.utils.importlib import import_module
 from .config import DjangoSettings, AppsSettings
 from .config import CompressEnabled
 
@@ -63,10 +65,34 @@ class BaseSettings(DjangoSettings, AppsSettings, Settings):
         return apps
 
 
-class Development(BaseSettings):
+def get_local_settings():
+    """ localSettings per developer
+
+        For instance, for USER=prophet we will try to use
+        mixin ``Prophet`` in CBS Live.
+        If it is not present, no problem, exceptions is silenced.
+    """
+    try:
+        developer_settings_name = os.environ.get('USER', '').title()
+        live_settings = import_module('{{ project_name }}.live_settings')
+        return getattr(live_settings, developer_settings_name)
+    except (ImportError, AttributeError):
+        logging.error('Could not import %s', developer_settings_name)
+        class LocalSettings:
+            pass
+        return LocalSettings
+
+LocalSettings = get_local_settings()
+
+
+class BaseLive(BaseSettings):
     DEBUG = True
     DEBUG_TOOLBAR_ENABLED = True
     TEMPLATE_DEBUG = True
+
+
+class Live(LocalSettings, BaseLive):
+    pass
 
 
 class Testing(BaseSettings):
@@ -87,7 +113,12 @@ class Testing(BaseSettings):
     )
 
 
-class Staging(CompressEnabled, BaseSettings):
+class Dev(CompressEnabled, BaseSettings):
+    """ Change settings for db, cache etc."""
+    DEBUG = False
+
+
+class Rc(CompressEnabled, BaseSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
 
