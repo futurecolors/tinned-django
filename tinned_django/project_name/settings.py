@@ -77,7 +77,7 @@ def get_local_settings():
         live_settings = import_module('{{ project_name }}.live_settings')
         return getattr(live_settings, developer_settings_name)
     except (ImportError, AttributeError):
-        logging.error('Could not import %s', developer_settings_name)
+        logging.warn('Could not import %s', developer_settings_name)
         class LocalSettings:
             pass
         return LocalSettings
