@@ -12,6 +12,7 @@ Changelog
 * Fixed sRGB problem in thumbnails
 * Fixed descriptor problems by switching to fc-thumbnail (sorl fork)
 * Template loader should cache templates
+* Package pymorphy sqlite for simpicity
 
 
 0.2 (25-06-2013)
