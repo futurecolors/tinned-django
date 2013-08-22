@@ -111,16 +111,21 @@ class Testing(BaseSettings):
     )
 
 
-class Dev(DevDatabaseSettings, CompressEnabled, EmailDebugSettings, BaseSettings):
+class BaseRealSettings(CacheRedis, CompressEnabled, BaseSettings):
+    """ Non-development settings"""
+    pass
+
+
+class Dev(DevDatabaseSettings, EmailDebugSettings, BaseRealSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
 
 
-class Rc(RcDatabaseSettings, CompressEnabled, EmailDebugSettings, BaseSettings):
+class Rc(RcDatabaseSettings, EmailDebugSettings, BaseRealSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
 
 
-class Production(ProdDatabaseSettings, CompressEnabled, BaseSettings):
+class Production(ProdDatabaseSettings, BaseRealSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
