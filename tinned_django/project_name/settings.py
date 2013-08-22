@@ -4,8 +4,7 @@
 import os
 from configurations import Settings
 from django.utils.importlib import import_module
-from .config import DjangoSettings, AppsSettings, EmailDebugSettings, RcDatabaseSettings, DevDatabaseSettings, ProdDatabaseSettings
-from .config import CompressEnabled
+from .config import *
 
 
 class BaseSettings(DjangoSettings, AppsSettings, Settings):
@@ -84,7 +83,7 @@ def get_local_settings():
 LocalSettings = get_local_settings()
 
 
-class BaseLive(EmailDebugSettings, BaseSettings):
+class BaseLive(CeleryDevSettings, EmailDebugSettings, BaseSettings):
     DEBUG = True
     DEBUG_TOOLBAR_ENABLED = True
     TEMPLATE_DEBUG = True

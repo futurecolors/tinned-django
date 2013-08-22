@@ -1,22 +1,25 @@
 # coding: utf-8
+from apps.utils.redis import get_redis_db
+import celery_redis_unixsocket  # it's important for monkey-patching
 
 
 class CelerySettings(object):
-    BROKER_BACKEND = "redis"
-    BROKER_HOST = "localhost"
-    BROKER_PORT = 6379
-    BROKER_USER = ""
-    BROKER_PASSWORD = ""
-    BROKER_VHOST = "5"
+    # Fix it after upgrade to kombu>=3.0 (currently incompatible with django-celery)
+    # celery_redis_unixsocket won't be necessary anymore too.
+    # BROKER_URL = 'redis+socket:///var/run/redis/{{ project_name }}.sock/1'
+    # CELERY_RESULT_BACKEND = BROKER_URL
 
-    CELERY_RESULT_BACKEND = "database"
+    BROKER_TRANSPORT = 'celery_redis_unixsocket.broker.Transport'
+    BROKER_HOST = '/var/run/redis/{{ project_name}}.sock'
+    BROKER_VHOST = 1
+
     CELERY_IGNORE_RESULT = False
-    CELERY_TRACK_STARTED = True
-
-    REDIS_HOST = "localhost"
-    REDIS_PORT = 6379
-    REDIS_DB = 2
-    REDIS_CONNECT_RETRY = True
+    CELERY_RESULT_BACKEND = 'redisunixsocket'
+    CELERY_REDIS_HOST = BROKER_HOST
 
     CELERY_SEND_EVENTS = True
     CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+
+
+class CeleryDevSettings(object):
+    BROKER_VHOST = get_redis_db()

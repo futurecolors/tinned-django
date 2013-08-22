@@ -17,4 +17,4 @@ class EmailBaseSettings(object):
 class EmailDebugSettings(object):
     EMAIL_DEBUG = True  # All email goes to debug address instead of real recipients
     EMAIL_DEBUG_ADDRESSES = ('mail@example.com', )
-    CELERY_EMAIL_BACKEND = 'apps.cms.utils.email.DebugSMTPEmailBackend'
+    CELERY_EMAIL_BACKEND = 'apps.utils.email.DebugSMTPEmailBackend'
