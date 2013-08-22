@@ -1,6 +1,6 @@
 # Always pin your requirements
 # http://nvie.com/posts/pin-your-packages/
-django==1.5.1
+django>=1.5.1,<1.6
 MySQL-python==1.2.3
 Pillow==2.0.0
 
