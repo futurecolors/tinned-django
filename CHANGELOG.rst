@@ -1,10 +1,11 @@
 Changelog
 ~~~~~~~~~
 
-0.3 (??-07-2013)
+0.3 (22-08-2013)
 ^^^^^^^^^^^^^^^^
 * Added dynamic local settings per user
 * Python 2.7 required for underlying project
+* Simpified debug config
 
 
 0.2 (25-06-2013)

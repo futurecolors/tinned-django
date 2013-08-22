@@ -10,26 +10,9 @@ class DebugSettings(object):
         'HIDE_DJANGO_SQL': False,
     }
 
-    DEBUG_TOOLBAR_PANELS = (
-        'debug_toolbar.panels.version.VersionDebugPanel',
-        'debug_toolbar.panels.timer.TimerDebugPanel',
-        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-        'debug_toolbar.panels.headers.HeaderDebugPanel',
-        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-        'debug_toolbar.panels.template.TemplateDebugPanel',
-        'debug_toolbar.panels.sql.SQLDebugPanel',
-        'debug_toolbar.panels.signals.SignalDebugPanel',
-        'debug_toolbar.panels.logger.LoggingPanel',
-    )
-
-    PROFILER_ENABLED = False
-
-    # empty for no logging
+    # Empty for no logging
+    # Don't use with SENTRY_DSN together, this will take prescendence
     # http://raven.readthedocs.org/en/latest/config/django.html
     RAVEN_CONFIG = {
         'dsn': '',  # http://public:secret@example.com/1
     }
-
-    # 404 Logging           http://raven.readthedocs.org/en/latest/config/django.html?highlight=sentry404catchmiddleware#logging
-    # Message Reference     http://raven.readthedocs.org/en/latest/config/django.html?highlight=sentry404catchmiddleware#message-references
-    RAVEN_MIDDLEWARES_ENABLED = True

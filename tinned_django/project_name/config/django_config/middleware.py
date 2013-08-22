@@ -17,7 +17,9 @@ class MiddlewareSettings(object):
         if self.DEBUG and self.DEBUG_TOOLBAR_ENABLED:
             middleware_classes.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
-        if self.RAVEN_MIDDLEWARES_ENABLED:
+        # 404 Logging           http://raven.readthedocs.org/en/latest/config/django.html?highlight=sentry404catchmiddleware#logging
+        # Message Reference     http://raven.readthedocs.org/en/latest/config/django.html?highlight=sentry404catchmiddleware#message-references
+        if self.RAVEN_CONFIG.get('dsn'):
             middleware_classes.extend(['raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
                                        'raven.contrib.django.middleware.Sentry404CatchMiddleware'])
         return tuple(middleware_classes)
