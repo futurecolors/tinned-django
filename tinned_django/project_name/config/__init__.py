@@ -9,5 +9,5 @@ class DjangoSettings(DatabaseSettings, CacheSettings, LocaleSettings, LoggingSet
 
 
 class AppsSettings(AdminTools, CelerySettings, CkeditorSettings, CompressSettings,
-                   DebugSettings, PyMorphy, ThumbnailSettings):
+                   DebugSettings, EmailBaseSettings, PyMorphy, ThumbnailSettings):
     pass

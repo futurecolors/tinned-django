@@ -1,11 +1,10 @@
 # coding: utf-8
 """ Class-based settings for different configurations
 """
-import logging
 import os
 from configurations import Settings
 from django.utils.importlib import import_module
-from .config import DjangoSettings, AppsSettings
+from .config import DjangoSettings, AppsSettings, EmailDebugSettings
 from .config import CompressEnabled
 
 
@@ -43,6 +42,7 @@ class BaseSettings(DjangoSettings, AppsSettings, Settings):
             'widget_tweaks',
             'guardian',
             'djcelery',
+            'djcelery_email',
             'ckeditor',
             'waffle',
             'floppyforms',
@@ -60,7 +60,7 @@ class BaseSettings(DjangoSettings, AppsSettings, Settings):
             'django.contrib.sites',
         )
 
-        if self.DEBUG_TOOLBAR_ENABLED:
+        if self.DEBUG and self.DEBUG_TOOLBAR_ENABLED:
             apps += ('debug_toolbar',)
         return apps
 
@@ -77,7 +77,6 @@ def get_local_settings():
         live_settings = import_module('{{ project_name }}.live_settings')
         return getattr(live_settings, developer_settings_name)
     except (ImportError, AttributeError):
-        logging.error('Could not import %s', developer_settings_name)
         class LocalSettings:
             pass
         return LocalSettings
@@ -85,7 +84,7 @@ def get_local_settings():
 LocalSettings = get_local_settings()
 
 
-class BaseLive(BaseSettings):
+class BaseLive(EmailDebugSettings, BaseSettings):
     DEBUG = True
     DEBUG_TOOLBAR_ENABLED = True
     TEMPLATE_DEBUG = True
@@ -113,12 +112,12 @@ class Testing(BaseSettings):
     )
 
 
-class Dev(CompressEnabled, BaseSettings):
+class Dev(CompressEnabled, EmailDebugSettings, BaseSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
 
 
-class Rc(CompressEnabled, BaseSettings):
+class Rc(CompressEnabled, EmailDebugSettings, BaseSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
 
