@@ -32,7 +32,7 @@ class UncanningTest(TestCase):
 
     @nottest
     def create_virtualenv(self):
-        sh.virtualenv(self.tmp_dir_env)
+        sh.virtualenv(self.tmp_dir_env, python='python2.7')
         pip = sh.Command(os.path.join(self.tmp_dir_env, 'bin/pip'))
         reqs_file = os.path.join(self.tmp_dir_src, 'requirements.txt')
 

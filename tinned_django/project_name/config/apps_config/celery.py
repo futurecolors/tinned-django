@@ -1,5 +1,4 @@
 # coding: utf-8
-from apps.utils.redis import get_redis_db
 import celery_redis_unixsocket  # it's important for monkey-patching
 
 
@@ -22,4 +21,7 @@ class CelerySettings(object):
 
 
 class CeleryDevSettings(object):
-    BROKER_VHOST = get_redis_db()
+    def BROKER_VHOST(self):
+        # no need to import it during tests
+        from apps.utils.redis import get_redis_db
+        return get_redis_db()
