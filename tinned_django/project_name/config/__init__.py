@@ -3,7 +3,7 @@ from django_config import *
 from apps_config import *
 
 
-class DjangoSettings(DatabaseSettings, CacheSettings, LocaleSettings, LoggingSettings,
+class DjangoSettings(DatabaseSettings, CacheDummySettings, LocaleSettings, LoggingSettings,
                      MediaSettings, MiddlewareSettings, SessionSettings, TemplateSettings):
     pass
 
