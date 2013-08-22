@@ -4,7 +4,7 @@
 import os
 from configurations import Settings
 from django.utils.importlib import import_module
-from .config import DjangoSettings, AppsSettings, EmailDebugSettings
+from .config import DjangoSettings, AppsSettings, EmailDebugSettings, RcDatabaseSettings, DevDatabaseSettings, ProdDatabaseSettings
 from .config import CompressEnabled
 
 
@@ -112,16 +112,16 @@ class Testing(BaseSettings):
     )
 
 
-class Dev(CompressEnabled, EmailDebugSettings, BaseSettings):
+class Dev(DevDatabaseSettings, CompressEnabled, EmailDebugSettings, BaseSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
 
 
-class Rc(CompressEnabled, EmailDebugSettings, BaseSettings):
+class Rc(RcDatabaseSettings, CompressEnabled, EmailDebugSettings, BaseSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
 
 
-class Production(CompressEnabled, BaseSettings):
+class Production(ProdDatabaseSettings, CompressEnabled, BaseSettings):
     """ Change settings for db, cache etc."""
     DEBUG = False
