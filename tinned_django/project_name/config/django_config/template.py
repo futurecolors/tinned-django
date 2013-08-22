@@ -30,3 +30,15 @@ class TemplateSettings(object):
         return (
             os.path.join(self.PROJECT_ROOT, 'templates'),
         )
+
+
+class CachedTemplates(TemplateSettings):
+    """ Speeds up rendering if template tags are thread-safe.
+        They should be, so we're using it.
+    """
+    TEMPLATE_LOADERS = (
+        ('django.template.loaders.cached.Loader', (
+            'django.template.loaders.app_directories.Loader',
+            'django.template.loaders.filesystem.Loader',
+        )),
+    )

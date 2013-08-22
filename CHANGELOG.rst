@@ -10,6 +10,8 @@ Changelog
 * Updated thumbnail, cache, redis configs to use sockets
 * Latest Django 1.5.X
 * Fixed sRGB problem in thumbnails
+* Fixed descriptor problems by switching to fc-thumbnail (sorl fork)
+* Template loader should cache templates
 
 
 0.2 (25-06-2013)

@@ -111,7 +111,7 @@ class Testing(BaseSettings):
     )
 
 
-class BaseRealSettings(CacheRedis, CompressEnabled, BaseSettings):
+class BaseRealSettings(CachedTemplates, CacheRedis, CompressEnabled, BaseSettings):
     """ Non-development settings"""
     pass
 
