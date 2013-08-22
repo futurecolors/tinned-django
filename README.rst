@@ -41,8 +41,9 @@ They're defined in ``{{ project_name}}.settings`` module.
 
 :BaseSettings:  Defaults for all other environments, safe and sound
 :BaseLive:      Local development
-:Live:          Nightly/daily/hourly builds, includes local settings per developer
-:Testing:       Running tests
+:Live:          Real-time updates, includes local settings per developer
+:Testing:       Running tests in CI/locally
+:Dev:           Nightly/daily/hourly builds for QA and other folks
 :Rc:            Pre-production, for per-release deploys
 :Production:    No comments
 

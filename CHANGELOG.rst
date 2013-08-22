@@ -6,6 +6,10 @@ Changelog
 * Added dynamic local settings per user
 * Python 2.7 required for underlying project
 * Simpified debug config
+* Added email config
+* Updated thumbnail, cache, redis configs to use sockets
+* Latest Django 1.5.X
+* Fixed sRGB problem in thumbnails
 
 
 0.2 (25-06-2013)
