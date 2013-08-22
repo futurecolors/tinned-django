@@ -32,6 +32,7 @@ django-sortable-fc==1.0
 django-waffle==0.9.1
 django-floppyforms==1.1
 django-extensions==1.1.1
+django-query-exchange-fc=1.0
 
 # Tests
 mock==1.0.0
